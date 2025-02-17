@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+            background: url('https://w0.peakpx.com/wallpaper/322/50/HD-wallpaper-time-clock-abstract-time-other.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .container {
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 1200px;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+        .timebox {
+            border: 3px solid goldenrod;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+        .timebox:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /* Footer Styles */
+        .footer {
+              margin-top: 50px;
+              font-size: 18px; /* Increased size */
+              color: #d4af37; /* Darker gold color */
+              font-weight: bold;
+               padding: 15px;
+               background: rgba(0, 0, 0, 0.7); /* Dark background for visibility */
+               width: 100%;
+               text-align: center;
+               border-radius: 10px;
+         }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>World Clock Center</h1>
+        <div class="clock-grid">
+            <div class="timebox"><h2>India 🇮🇳</h2><p id="indiaDate"></p><p id="indiaTime"></p></div>
+            <div class="timebox"><h2>New York 🇺🇸</h2><p id="newYorkDate"></p><p id="newYorkTime"></p></div>
+            <div class="timebox"><h2>London 🇬🇧</h2><p id="londonDate"></p><p id="londonTime"></p></div>
+            <div class="timebox"><h2>Paris 🇫🇷</h2><p id="parisDate"></p><p id="parisTime"></p></div>
+            <div class="timebox"><h2>Tokyo 🇯🇵</h2><p id="tokyoDate"></p><p id="tokyoTime"></p></div>
+            <div class="timebox"><h2>Sydney 🇦🇺</h2><p id="sydneyDate"></p><p id="sydneyTime"></p></div>
+            <div class="timebox"><h2>Berlin 🇩🇪</h2><p id="berlinDate"></p><p id="berlinTime"></p></div>
+            <div class="timebox"><h2>Moscow 🇷🇺</h2><p id="moscowDate"></p><p id="moscowTime"></p></div>
+            <div class="timebox"><h2>Toronto 🇨🇦</h2><p id="torontoDate"></p><p id="torontoTime"></p></div>
+            <div class="timebox"><h2>Beijing 🇨🇳</h2><p id="beijingDate"></p><p id="beijingTime"></p></div>
+            <div class="timebox"><h2>São Paulo 🇧🇷</h2><p id="saopauloDate"></p><p id="saopauloTime"></p></div>
+            <div class="timebox"><h2>Johannesburg 🇿🇦</h2><p id="johannesburgDate"></p><p id="johannesburgTime"></p></div>
+        </div>
+        <!-- Footer Section -->
+        <div class="footer">
+           © All rights reserved by Lavanya R ❤️
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const timeZones = {
+                india: "Asia/Kolkata",
+                newYork: "America/New_York",
+                london: "Europe/London",
+                paris: "Europe/Paris",
+                tokyo: "Asia/Tokyo",
+                sydney: "Australia/Sydney",
+                berlin: "Europe/Berlin",
+                moscow: "Europe/Moscow",
+                toronto: "America/Toronto",
+                beijing: "Asia/Shanghai",
+                saopaulo: "America/Sao_Paulo",
+                johannesburg: "Africa/Johannesburg"
+            };
+
+            for (let city in timeZones) {
+                const now = new Date().toLocaleString("en-US", { 
+                    timeZone: timeZones[city], 
+                    dateStyle: "full", 
+                    timeStyle: "medium", 
+                    hourCycle: "h24"
+                }).split(",");
+
+                document.getElementById(`${city}Date`).innerHTML = now[0] + ", " + now[1]; // Date
+                document.getElementById(`${city}Time`).innerHTML = now[2]; // Time
+            }
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
